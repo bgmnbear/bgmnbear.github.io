@@ -498,7 +498,7 @@ ul,li {
 	position: relative;
 	top: 2px;
 	margin: 0 0 2px 0;
-	width: 200px;
+	width: 130px;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 	padding-bottom: 0.5rem
 }
@@ -519,7 +519,8 @@ ul,li {
 .profile-name {
 	font: 2rem/3.5rem "Oswald-Regular","Microsoft Yahei","Source Sans Pro",Arial,sans-serif;
 	color: #333;
-	text-align: center
+	text-align: center;
+    font-size: 20px
 }
 
 .profile-signature {
@@ -1524,7 +1525,8 @@ html::-webkit-scrollbar-track:hover,.sidebar-archive::-webkit-scrollbar-track:ho
 .post-body .intro-title,.about-body .intro-title {
 	font: 4rem/5.3rem "Oswald-Regular","Microsoft Yahei","Source Sans Pro",Arial,sans-serif;
 	color: #fff;
-	margin: 0
+	margin: 0;
+    font-size: 150%
 }
 
 .post-intro-tags {
