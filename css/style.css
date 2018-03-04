@@ -344,7 +344,8 @@ ul,li {
 
 .intro-fade-in {
 	opacity: 1;
-	transform: translate(0, 0)
+	transform: translate(0, 0);
+    font-size: 150%
 }
 
 .header {
@@ -2155,9 +2156,5 @@ html::-webkit-scrollbar-track:hover,.sidebar-archive::-webkit-scrollbar-track:ho
 	#busuanzi_container_site_pv {
 		font: 1rem "Oswald-Regular","Microsoft Yahei","Source Sans Pro",Arial,sans-serif
 	}
-
-    h1 .intro-title .intro-fade-in {
-        font-size: 100%
-    }
 
 }
