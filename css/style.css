@@ -1935,8 +1935,6 @@ html::-webkit-scrollbar-track:hover,.sidebar-archive::-webkit-scrollbar-track:ho
 
 	.site-intro {
 		box-shadow: 0 -0.2rem 0.5rem 0.2rem rgba(0,0,0,0.8)
-        height: 15vh;
-        !important
 	}
 
 	.header .blog-title {
@@ -2157,4 +2155,9 @@ html::-webkit-scrollbar-track:hover,.sidebar-archive::-webkit-scrollbar-track:ho
 	#busuanzi_container_site_pv {
 		font: 1rem "Oswald-Regular","Microsoft Yahei","Source Sans Pro",Arial,sans-serif
 	}
+
+    h1 .intro-title .intro-fade-in {
+        font-size: 100%
+    }
+
 }
