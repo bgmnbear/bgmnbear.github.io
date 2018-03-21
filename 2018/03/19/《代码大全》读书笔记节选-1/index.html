@@ -6,7 +6,7 @@
     <meta name="google-site-verification" content="EJ0sqC0MdyHmBDJVE9oHTsb4mFx5qAQUimRuRq0jod4" />
     <title>
         
-        LazyBear&#39;s Blog
+        《代码大全》读书笔记节选(1) · LazyBear&#39;s Blog
         
     </title>
     <link rel="icon" href= /assets/favicon.ico>
@@ -59,12 +59,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >LazyBear&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">《代码大全》读书笔记节选(1)</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>Home</a>
 </header>
@@ -73,21 +84,43 @@
         <div class="site-intro">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            《代码大全》读书笔记节选(1)
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-href = 软件工程>软件工程</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/03/19</span>
+            </div>
         
     </div>
 </div>
@@ -155,39 +188,72 @@
             }
         </script>
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="content-show-full" href = "/2017/12/23/读过很多烂书后，我不禁反思…/" >
-                    <h2 class="abstract-title">
-                        
-                        <span>读过很多烂书后，我不禁反思…</span>
-                    </h2>
-                <div class="abstract-content">
-                    读过很多烂书后，我不禁反思…系统学习编程大概有半年了，唯一的感觉就是更频繁地意识到技术很渣心态极慌。再加上初学者的时间不叫时间这个设定，就算我一再避免被割韭菜收智商税，还是没少中招。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="《代码大全》读书笔记节选-1"><a href="#《代码大全》读书笔记节选-1" class="headerlink" title="《代码大全》读书笔记节选(1)"></a>《代码大全》读书笔记节选(1)</h1><p>好久好久都没更新博客了（懒），在时间安排比较自由并且有利于学习总结的情况下，写博客这件事情是值得坚持下去的。最近正好在读《代码大全》，虽然没读多少，但是受益匪浅，利用博客记录一下。<br>本文的大部分内容将以类似无序列表的方式展示，其实我是比较反对这种形式的读书笔记的，如果对书中的内容没有理解透彻，那么充其量就是一个导读表。我希望的读书笔记，至少是那种有原文对照，最好还有自己写的一些示例代码作为参考。虽说这样只能节选部分内容作为研究对象，失去了全面性，但是一定能让书写者和阅读者有所收获。因此，我会在之后为本文添加相关的原文和示例代码作为参考。</p>
+<hr>
+<h2 id="译序"><a href="#译序" class="headerlink" title="译序"></a>译序</h2><ul>
+<li><p>讲了一个有关本书中文名的<a href="https://www.zhihu.com/question/27930531/answer/243628006" target="_blank" rel="external">轶闻</a>，也就是说本书实际被命名为《完成代码》会更贴切内容。</p>
+</li>
+<li><p>还提供了一些有关选择阅读本书各章节的建议。</p>
+</li>
+</ul>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><ul>
+<li><p>提供了一些更为细致的阅读建议，方便处于不同阶段的程序员能够更有效率地阅读本书。这一部分还是很重要的，在读到后面尤其是有一些地方难以理解的时候，翻一下这几页，或许就会对当前的阅读计划做出有效的调整。</p>
+</li>
+<li><p>再就是对本书的赞誉，就当是做广告吧（笑）。</p>
+</li>
+</ul>
+<h2 id="第1章-欢迎进入软件构造的世界"><a href="#第1章-欢迎进入软件构造的世界" class="headerlink" title="第1章 欢迎进入软件构造的世界"></a>第1章 欢迎进入软件构造的世界</h2><ul>
+<li>详细讲解软件构建在开发过程中的重要性。读起来有一些无聊，但是本着“万事开头难”的想法，这一章节还是有必要快速过一遍的。</li>
+</ul>
+<h2 id="第2章-用隐喻来更充分地理解软件开发"><a href="#第2章-用隐喻来更充分地理解软件开发" class="headerlink" title="第2章 用隐喻来更充分地理解软件开发"></a>第2章 用隐喻来更充分地理解软件开发</h2><ul>
+<li><p>隐喻的重要性以及使用方法。读到这里还是比较好理解的，姑且可以认为使用隐喻或者比喻来忽略某一事件中不重要的细节，也可以说降低准确性，以达到明确主题的目的。</p>
+</li>
+<li><p>这部分的重点在于：选择合理范围内的隐喻，既不造成不必要的误解，又能提高开发过程中的效率。</p>
+</li>
+<li><p>插图以及侧边栏的注解很用心，但是也许在kindle上的观看体验不是特别好。</p>
+</li>
+</ul>
+<h2 id="第3章-三思而后行：前期准备"><a href="#第3章-三思而后行：前期准备" class="headerlink" title="第3章 三思而后行：前期准备"></a>第3章 三思而后行：前期准备</h2><ul>
+<li><p>貌似是第一章内容的强化版。看到现在，感觉本书的知识点众多且比较零碎，就好像在看寓言故事和名言警句一样：高潮迭起，但是如果只是快速看一遍并吸收不了多少。看来以后还要多看几遍…</p>
+</li>
+<li><p>这章后面的内容和我目前所处阶段没太大交集，匆匆扫一眼罢了，留个念想以后有需要再来查就好。</p>
+</li>
+</ul>
+<h2 id="第4章-关键的“构建”决策"><a href="#第4章-关键的“构建”决策" class="headerlink" title="第4章 关键的“构建”决策"></a>第4章 关键的“构建”决策</h2><ul>
+<li><p>不负众望，这一章终于开始讲如何写具体的代码了。先是一些考古内容，有些内容目前来看有些过时(我一直在想考古文章算不算过时…)，自己找些其他符合时效性的文章补一下就行了。</p>
+</li>
+<li><p>又通过一些具体实例，讲解了一些编程通识技巧。技巧非常多，根据情况自取所需就行了。</p>
+</li>
+</ul>
+<hr>
+<p>本篇先写这么多，因为之前在看这本书的时候并没有实时记笔记，所以好多内容都是后来再次翻看原书并且加以回忆写的。身为初学者，难免文笔拙劣，望见谅。</p>
 
-最坑爹的当属「xx入门系列」，这方面的相关信息可以用良莠不齐来形容，但是影响最大的还是教...
-                </div>
-            </a>
-            <div class="abstract-post-meta">
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-pager">
+        
+        
+            <li class="previous">
+                <a href= "/2017/12/23/读过很多烂书后，我不禁反思…/" title= 读过很多烂书后，我不禁反思… >
+                    <span>Previous Post</span>
+                    <span>读过很多烂书后，我不禁反思…</span>
+                </a>
+            </li>
+        
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        <a class="post-tag" href="javascript:void(0);" data-href = Water>Water</a>
     
-</div>
-                
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer"></span><span class="abstract-time">2017/12/23</span>
-                </div>
-            </div>
-        </article>
-    
-    <!-- paginator  -->
+    <!--PC版-->
+
+    <!--PC版-->
+
+
     
 </main>
             <!-- profile -->
@@ -234,6 +300,13 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper">
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#《代码大全》读书笔记节选-1"><span class="toc-number">1.</span> <span class="toc-text">《代码大全》读书笔记节选(1)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#译序"><span class="toc-number">1.1.</span> <span class="toc-text">译序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.2.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第1章-欢迎进入软件构造的世界"><span class="toc-number">1.3.</span> <span class="toc-text">第1章 欢迎进入软件构造的世界</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第2章-用隐喻来更充分地理解软件开发"><span class="toc-number">1.4.</span> <span class="toc-text">第2章 用隐喻来更充分地理解软件开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第3章-三思而后行：前期准备"><span class="toc-number">1.5.</span> <span class="toc-text">第3章 三思而后行：前期准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第4章-关键的“构建”决策"><span class="toc-number">1.6.</span> <span class="toc-text">第4章 关键的“构建”决策</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top">&#xe639;</div>
     <div class="sidebar">
