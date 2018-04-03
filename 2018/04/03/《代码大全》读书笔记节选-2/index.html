@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>LazyBear&#39;s Blog</title>
+    <title>《代码大全》读书笔记节选(2) · LazyBear&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -175,12 +177,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >LazyBear&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">《代码大全》读书笔记节选(2)</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>LazyBear's Blog</a>
 </header>
@@ -194,24 +207,67 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            《代码大全》读书笔记节选(2)
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "软件工程">软件工程</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2018/04/03</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -295,75 +351,60 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/12/23/读过很多烂书后，我不禁反思…/" >
-                
-                    <span>读过很多烂书后，我不禁反思…</span>
-            </a>
-            <div class="abstract-content">
-                读过很多烂书后，我不禁反思…系统学习编程大概有半年了，唯一的感觉就是更频繁地意识到技术很渣心态极慌。再加上初学者的时间不叫时间这个设定，就算我一再避免被割韭菜收智商税，还是没少中招。
+            <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="《代码大全》读书笔记节选-2"><a href="#《代码大全》读书笔记节选-2" class="headerlink" title="《代码大全》读书笔记节选(2)"></a>《代码大全》读书笔记节选(2)</h1><p>又到了夏天，可能是比较怕冷的缘故，在夏天反而能安静地看书。最近还是像以前一样，每天白天看书学习写代码，偶尔玩游戏。近一个月看了不少人文书籍，也算是一种很好的休闲方式吧。但是为了生活，还是要不停地努力学习==</p>
+<p>一直没找到合适的电子版原书，就是可以复制粘贴那种，截图吧还比较影响看书的效率，好在随便上网一搜就能搜到很多那种摘抄式的《代码大全》读书笔记，在整理笔记的时候可以对照使用。</p>
+<hr>
+<h2 id="第5章-软件构建中的设计"><a href="#第5章-软件构建中的设计" class="headerlink" title="第5章 软件构建中的设计"></a>第5章 软件构建中的设计</h2><ul>
+<li><p>紧接着前几章内容，循序渐进讲解软件工程中的设计，重心也越来越贴近业务代码层次。</p>
+</li>
+<li><p>在很久之前，第一次看这一方面的知识的时候，仅仅理解字面的意思就十分吃力。虽然当时并没有看过《代码大全》，但是在最近看这本书的时候，就算是第一次看，也会有很大的感悟。区别是近半年抄写了不少代码…</p>
+</li>
+<li><p>关于耦合标准：在看的时候，脑海中就会自动地显示出曾经写过或是看过的代码片段，再搭配书中的详细解析，就会很自然地理解这段代码为什么要这样做或者这样做到底有什么好处。再接下来就会对这些代码片段的调用栈感兴趣，在需要的时候就会主动去了解一些框架之中贴近底层的那些东西，对单纯学习而言无疑是大有裨益的。</p>
+</li>
+<li><p>每看完一个小标题极其下面的内容，就会立刻和一些曾经学过/看过/写过的代码片段在脑海中相呼应。总是在一瞬间恍然大悟，解决了困扰我很久的问题。当然这与看书时候的状态关系十分紧密。</p>
+</li>
+<li><p>这里略读了许多，因为感觉最近看书的效率有点低，算是自我调整。</p>
+</li>
+<li><p>关于文档设计，讲到了一个万变不离其宗的原则：Gresham 法则。</p>
+</li>
+<li><p>这一章不断提到一个名词: 迭代。这不只是一个软件工程的名次，更是一种学习/做事/生活的方式。本书中也有提到，第一版《代码大全》在第二版出版之后来看，无疑有许多设计是过时的、没必要的，同理，现在来看《代码大全》第二版中也有许多失去了时效性的知识。当然，作为软件开发领域经典的著作，这些知识自有它存在的种种道理，我的水平显然不足以评判些什么。但是，作为一个普通读者，这些“过时”的知识至少能为书中的许多观点现身说法，更有助于理解作者想阐述的内容核心本身。</p>
+</li>
+<li><p>最近也在看《人月神话》，明显比这本书友好的多，看来第一次读《代码大全》还是略读为妙…</p>
+</li>
+</ul>
+<hr>
+<p>看书的时候记笔记真的影响阅读效率，下次想一个更好的方法。</p>
 
-最坑爹的当属「xx入门系列」，这方面的相关信息可以用良莠不齐来形容，但是影响最大的还是教育环境。如果环境不好，那么大概率就只能相信运气了。举个挺蠢的例子：问第一门语言学什么？答身边能解答你问题的人用哪门就学哪门，不然学什么都一样——都学不懂。当然还有许多垃圾书，这类书在当前阶段看过之后的唯一好处就是能自我麻醉吧。诚然，没有什么东西是一开始就做到完美的，但是一定要知道提升的过程才是最重要的。有些书中的短时间...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/12/23</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
-    
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Water">Water</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    
-    
-        <article class="index-post">
-            <a class="abstract-title" href = "/2017/11/25/记一次程序设计实验周/" >
-                
-                    <span>记一次程序设计实验周</span>
-            </a>
-            <div class="abstract-content">
-                记一次程序设计实验周本来打算正常划水糊弄完，但是非常无奈第一次在学校无可避免地遇到成功人士（后文用a代替），于是就有了这篇文章。
+    </article>
+    <!-- 前后页  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2018/03/25/流水账之整理寝室/" title= 流水账之整理寝室 >
+                    <div class="prevTitle">流水账之整理寝室</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
 
-Day-1
-a: 请同学们在项目中多使用多重数组、指针和链表等高级结构。
+<!-- City版安装代码已完成 -->
+    
+    
+    <!--PC版-->
 
-打开机房电脑扫雷游戏的我不禁瑟瑟发抖，因为我貌似去年和室友说过类似的话，希望他们以后不要记起来…
-Day-2
-a: 有不少组已经很快地完成了代码，开始做图形化界面。有一组同学告诉我，他们打算用MFC去做界面，非常好！
+    <!--PC版-->
 
-基本都是网上找的代码直接复制粘贴，顶多改几个错别字，速度能不快吗…听到MFC，我还以为穿越了，直到看见旁边同学桌子上的几本古董书我才相信这是真的…
-Day-3
-a: ...
-            </div>
-            <div class="abstract-post-meta">
-                <!-- date  -->
-                <div class="abstract-date">
-                    <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2017/11/25</span>
-                </div>
-                <!-- tags  -->
-                
-                <div class= abstract-tags >
+
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Water">Water</a>
-    
-</div>
-                
-            </div>
-        </article>
-    
-    <!-- paginator  -->
-    
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -431,6 +472,24 @@ a: ...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#《代码大全》读书笔记节选-2"><span class="toc-number">1.</span> <span class="toc-text">《代码大全》读书笔记节选(2)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第5章-软件构建中的设计"><span class="toc-number">1.1.</span> <span class="toc-text">第5章 软件构建中的设计</span></a></li></ol></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -593,6 +652,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
