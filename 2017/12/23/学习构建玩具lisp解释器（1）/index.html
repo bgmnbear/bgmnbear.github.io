@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>categories · LazyBear&#39;s Blog</title>
+    <title>学习构建玩具lisp解释器（1） · LazyBear&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -65,6 +65,8 @@
 
     <link rel="preload" href= /css/style.css?v=20180317 as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" type="text/css" href= /css/mobile.css?v=20180317 media="(max-width: 980px)"/>
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         
     <link rel="icon" href= /assets/favicon.ico>
     <script>
@@ -175,12 +177,23 @@
 </head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >LazyBear&#39;s Blog</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">学习构建玩具lisp解释器（1）</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>LazyBear's Blog</a>
 </header>
@@ -194,24 +207,69 @@
 
 
 
+height:50vh;
+
 >
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-placeholder"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
+            学习构建玩具lisp解释器（1）
+            <!-- 404 -->
+            
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <!-- 文章页标签  -->
+            
+                <div class= post-intro-tags >
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "《SICP》">《SICP》</a>
+    
+</div>
+            
+            <div class="post-intro-meta">
+                <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                <span class="post-intro-time">2017/12/23</span>
+                
+                <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                    <span class="iconfont-archer">&#xe602;</span>
+                    <span id="busuanzi_value_page_pv"></span>
+                </span>
+                
+                <span class="shareWrapper">
+                    <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                    <span class="shareText">Share</span>
+                    <ul class="shareList">
+                        <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                            <div class="share-qrcode"></div>
+                        </li>
+                        <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                        <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                        <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                        <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                    </ul>
+                </span>
+            </div>
         
     </div>
 </div>
@@ -297,14 +355,34 @@
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        
+        <h1 id="学习构建玩具lisp解释器（1）"><a href="#学习构建玩具lisp解释器（1）" class="headerlink" title="学习构建玩具lisp解释器（1）"></a>学习构建玩具lisp解释器（1）</h1><p>这部分的内容在SICP第四章有所涉及，但是书上的内容就是搞不定，所以在网上找了个例子，换个方式来学习SICP。<a href="https://github.com/sumNerGL/FakeLispInterpreter" target="_blank" rel="external">代码示例在这里</a>。</p>
+<p>ps: 在repo中未找到相关开源协议，侵权删。</p>
+<hr>
+<p>这种文章在多数情况下并不能比较完整地学习一个几百行或者以上的程序，因为在文章中代码多数是以代码片段出现的，无法像在IDE或者编辑器中一样跳转/运行/修改，所以就是起到一个导读或者难点解析的作用，还是要以实际的完整程序为主。</p>
+<p>本文将以编程初学者的角度来学习一个玩具lisp解释器的构建过程，面向新手，非常简单易懂。</p>
+<p>从程序的入口开始读，可以先看一下测试代码，快速了解程序的具体作用：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></div><div class="line">    test_plus()</div><div class="line">    test_minus()</div><div class="line">    test_times()</div><div class="line">    test_divide()</div><div class="line">    test_calc()</div><div class="line">    test_judge()</div><div class="line">    test_greater_than()</div><div class="line">    test_less_than()</div><div class="line">    test_equal()</div><div class="line">    test_define_variable()</div><div class="line">    test_define_function()</div><div class="line">    test_call_function()</div><div class="line"></div><div class="line">    test_apply()</div><div class="line"></div><div class="line">    test_apply_trees()</div></pre></td></tr></table></figure></p>
+<p>之后浏览一下代码结构，不算测试，其实真正需要学习的部分并不多，只有 Apply类 和 tree 文件，一共只有200多行。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Apply</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, var=None, func=None)</span>:</span></div><div class="line">        <span class="keyword">if</span> var <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            var = &#123;&#125;</div><div class="line">        <span class="keyword">if</span> func <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            func = &#123;&#125;</div><div class="line"></div><div class="line">        self.var = var</div><div class="line">        self.func = func</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">plus</span><span class="params">(self, l)</span>:</span></div><div class="line">        r = self.apply(l[<span class="number">1</span>])</div><div class="line"></div><div class="line">        print(<span class="string">'r in begin of plus'</span>, r)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> i, e <span class="keyword">in</span> enumerate(l):</div><div class="line">            <span class="keyword">if</span> i &lt; <span class="number">2</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            r += self.apply(e)</div><div class="line"></div><div class="line">        print(<span class="string">'r in the end of plus'</span>, r)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> r</div><div class="line">    </div><div class="line">    ...</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">apply</span><span class="params">(self, l)</span>:</span></div><div class="line">        ops = &#123;</div><div class="line">            <span class="string">'+'</span>: self.plus,</div><div class="line">            <span class="string">'-'</span>: self.minus,</div><div class="line">            <span class="string">'*'</span>: self.times,</div><div class="line">            <span class="string">'/'</span>: self.divide,</div><div class="line">            <span class="string">'calc'</span>: self.calc,</div><div class="line">            <span class="string">'if'</span>: self.judge,</div><div class="line">            <span class="string">'&gt;'</span>: self.greater_than,</div><div class="line">            <span class="string">'&lt;'</span>: self.less_than,</div><div class="line">            <span class="string">'='</span>: self.equal,</div><div class="line">            <span class="string">'var'</span>: self.define_variable,</div><div class="line">            <span class="string">'def'</span>: self.define_function,</div><div class="line">            <span class="string">'call'</span>: self.call_function,</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> type(l) == list:</div><div class="line">            op = l[<span class="number">0</span>]</div><div class="line">            r = ops[op](l)</div><div class="line">        <span class="keyword">elif</span> type(l) == str:</div><div class="line">            r = self.call_variable(l)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            r = l</div><div class="line">        <span class="keyword">return</span> r</div></pre></td></tr></table></figure></p>
+<p>先是加减乘除四种运算，只需要着重看一下加法的就可以了。阅读顺序：test_plus() -&gt; Apply().plus() -&gt; self.apply()，难点出现在 apply() 的后8行。假设我之前并不熟悉这里的设计原理和思路，那么比较合理的方式是把函数中重要的变量打印出来。那么更复杂的情况呢？具体参考二分法debug，和这个类似。将 plus() 中的 r 打印出来后，猜测 apply() 这里使用递归来处理嵌套表达式计算，再回头看 apply() 的相关部分，确实是这样。</p>
+<p>继续看 apply() 的剩余部分，我们现在已经知道类型检查的大概作用，所以直接读就可以，非常简单。这里 call_variable() 用于解析 var 定义的变量，这部分我们先不去研究，不影响当前代码的阅读。看完了 apply()，我们回到 plus()，现在已经能比较流畅地理解 plus() 的具体流程了。</p>
+<p>简单总结一下：在 plus() 先调用 apply() 来处理嵌套表达式/定义变量，如果是嵌套那么递归调用 plus() （定义变量部分留到之后再来分析），最后回到 plus() 直接完成计算。至此，我们已经分析完了基础四则运算的实现以及具体流程。</p>
+
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2018/03/19/《代码大全》读书笔记节选-1/" title= 《代码大全》读书笔记节选(1) >
+                    <div class="nextTitle">《代码大全》读书笔记节选(1)</div>
+                </a>
+            
         </li>
         <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2017/12/23/读过很多烂书后，我不禁反思…/" title= 读过很多烂书后，我不禁反思… >
+                    <div class="prevTitle">读过很多烂书后，我不禁反思…</div>
+                </a>
             
         </li>
     </ul>
@@ -388,6 +466,24 @@
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#学习构建玩具lisp解释器（1）"><span class="toc-number">1.</span> <span class="toc-text">学习构建玩具lisp解释器（1）</span></a></li></ol>
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -638,6 +734,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
     
     </body>
 </html>
