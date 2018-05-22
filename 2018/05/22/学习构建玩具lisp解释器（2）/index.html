@@ -9,7 +9,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" >
-    <title>读过很多烂书后，我不禁反思… · LazyBear&#39;s Blog</title>
+    <title>学习构建玩具lisp解释器（2） · LazyBear&#39;s Blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -191,7 +191,7 @@
                 <a href="/" >LazyBear&#39;s Blog</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">读过很多烂书后，我不禁反思…</a>
+                <a href="#" class="post-name">学习构建玩具lisp解释器（2）</a>
             </div>
     </div>
     
@@ -223,7 +223,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            读过很多烂书后，我不禁反思…
+            学习构建玩具lisp解释器（2）
             <!-- 404 -->
             
         </h1>
@@ -241,13 +241,15 @@ height:50vh;
             
                 <div class= post-intro-tags >
     
-        <a class="post-tag" href="javascript:void(0);" data-tags = "Water">Water</a>
+        <a class="post-tag" href="javascript:void(0);" data-tags = "Python">Python</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags = "《SICP》">《SICP》</a>
     
 </div>
             
             <div class="post-intro-meta">
                 <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                <span class="post-intro-time">2017/12/23</span>
+                <span class="post-intro-time">2018/05/22</span>
                 
                 <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                     <span class="iconfont-archer">&#xe602;</span>
@@ -353,29 +355,35 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <h1 id="读过很多烂书后，我不禁反思…"><a href="#读过很多烂书后，我不禁反思…" class="headerlink" title="读过很多烂书后，我不禁反思…"></a>读过很多烂书后，我不禁反思…</h1><p>系统学习编程大概有半年了，唯一的感觉就是更频繁地意识到技术很渣心态极慌。再加上初学者的时间不叫时间这个设定，就算我一再避免被割韭菜收智商税，还是没少中招。</p>
-<hr>
-<p>最坑爹的当属「xx入门系列」，这方面的相关信息可以用良莠不齐来形容，但是影响最大的还是教育环境。如果环境不好，那么大概率就只能相信运气了。举个挺蠢的例子：问第一门语言学什么？答身边能解答你问题的人用哪门就学哪门，不然学什么都一样——都学不懂。当然还有许多垃圾书，这类书在当前阶段看过之后的唯一好处就是能自我麻醉吧。诚然，没有什么东西是一开始就做到完美的，但是一定要知道提升的过程才是最重要的。有些书中的短时间内就能学会的知识，从纯粹学习的角度来讲其实没什么价值，只有那种能长远地影响你的东西才是有用的。</p>
-<p>学习过程中，不要有任何信仰和偏见是对的，毕竟每个人的需求不一样。但是这并不意味着对任何书籍或者是教程的评价只能永远保持沉默或是随波逐流，在看过真正好的东西之后，自然有权利去评价那些之前或者后来看过的不如它的作品。总而言之，有些人啊，跪得久了，都忘了站着是什么感觉了。</p>
-<p>看不下去怎么办？不看啊，要么换一本比这本书好读的。假设大部分人都是自学，一天清醒的可用于学习编程的时间也就不超过6小时，所以就不要凭添痛苦了。</p>
-<p>经过以上方式的筛选，存活的书单或是学习路线已经没有多少了。</p>
+        <h1 id="学习构建玩具lisp解释器（2）"><a href="#学习构建玩具lisp解释器（2）" class="headerlink" title="学习构建玩具lisp解释器（2）"></a>学习构建玩具lisp解释器（2）</h1><p>我们在前一篇文章学习了如何解析四则运算，现在来看一下当时没有解决的 var 定义变量的相关代码。</p>
+<p>先看测试:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_calc</span><span class="params">()</span>:</span></div><div class="line">    l1 = [<span class="string">'calc'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">2</span>, <span class="string">'-'</span>, <span class="number">3</span>]]</div><div class="line">    l2 = [<span class="string">'calc'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">2</span>, <span class="string">'*'</span>, <span class="number">3</span>, <span class="string">'/'</span>, <span class="number">2</span>]]</div><div class="line">    l3 = [<span class="string">'calc'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">2</span>, <span class="string">'*'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">1</span>]], <span class="string">'/'</span>, <span class="number">2</span>]]</div><div class="line"></div><div class="line">    ensure(Apply().calc(l1) == <span class="number">0</span>, <span class="string">'calc 测试1'</span>)</div><div class="line">    ensure(Apply().calc(l2) == <span class="number">4</span>, <span class="string">'calc 测试2'</span>)</div><div class="line">    ensure(Apply().calc(l3) == <span class="number">4</span>, <span class="string">'calc 测试3'</span>)</div></pre></td></tr></table></figure>
+<p>其实和之前的解析思路大概一致，很好理解，阅读顺序：test_define_variable() -&gt; Apply().define_variable() -&gt; self.apply()。</p>
+<p>var 定义变量的本质就是解析出k, v键值对并且保存在对应的上下文中，依然使用递归处理嵌套表达式。var 定义结束后，调用该变量，我们直接看apply()的倒数第4和第5行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">define_variable</span><span class="params">(self, l)</span>:</span></div><div class="line">    v = self.apply(l[<span class="number">2</span>])</div><div class="line">    k = l[<span class="number">1</span>]</div><div class="line">    r = &#123;</div><div class="line">        k: v,</div><div class="line">    &#125;</div><div class="line">    self.var.update(r)</div><div class="line">    <span class="comment"># print(self.var)</span></div><div class="line">    <span class="keyword">return</span> <span class="string">'N/A'</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">call_variable</span><span class="params">(self, name)</span>:</span></div><div class="line">    <span class="keyword">return</span> self.var[name]</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">apply</span><span class="params">(self, l)</span>:</span></div><div class="line">    ops = &#123;</div><div class="line">        <span class="string">'+'</span>: self.plus,</div><div class="line">        <span class="string">'-'</span>: self.minus,</div><div class="line">        <span class="string">'*'</span>: self.times,</div><div class="line">        <span class="string">'/'</span>: self.divide,</div><div class="line">        <span class="string">'calc'</span>: self.calc,</div><div class="line">        <span class="string">'if'</span>: self.judge,</div><div class="line">        <span class="string">'&gt;'</span>: self.greater_than,</div><div class="line">        <span class="string">'&lt;'</span>: self.less_than,</div><div class="line">        <span class="string">'='</span>: self.equal,</div><div class="line">        <span class="string">'var'</span>: self.define_variable,</div><div class="line">        <span class="string">'def'</span>: self.define_function,</div><div class="line">        <span class="string">'call'</span>: self.call_function,</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> type(l) == list:</div><div class="line">        op = l[<span class="number">0</span>]</div><div class="line">        r = ops[op](l)</div><div class="line">    <span class="keyword">elif</span> type(l) == str:</div><div class="line">        r = self.call_variable(l)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        r = l</div><div class="line">    <span class="keyword">return</span> r</div></pre></td></tr></table></figure>
+<p>关于 call_variable() 没什么讲的，一看就懂。</p>
+<p>解决了 var定义变量 的相关代码，再回到测试，现在我们来看 test_calc()：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_calc</span><span class="params">()</span>:</span></div><div class="line">    l1 = [<span class="string">'calc'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">2</span>, <span class="string">'-'</span>, <span class="number">3</span>]]</div><div class="line">    l2 = [<span class="string">'calc'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">2</span>, <span class="string">'*'</span>, <span class="number">3</span>, <span class="string">'/'</span>, <span class="number">2</span>]]</div><div class="line">    l3 = [<span class="string">'calc'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">2</span>, <span class="string">'*'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, [<span class="number">1</span>, <span class="string">'+'</span>, <span class="number">1</span>]], <span class="string">'/'</span>, <span class="number">2</span>]]</div><div class="line"></div><div class="line">    ensure(Apply().calc(l1) == <span class="number">0</span>, <span class="string">'calc 测试1'</span>)</div><div class="line">    ensure(Apply().calc(l2) == <span class="number">4</span>, <span class="string">'calc 测试2'</span>)</div><div class="line">    ensure(Apply().calc(l3) == <span class="number">4</span>, <span class="string">'calc 测试3'</span>)</div></pre></td></tr></table></figure></p>
+<p>阅读顺序：test_calc() -&gt; Apply().calc() -&gt; self.calc_apply() -&gt; calc_common()/calc_list()。这些函数主要是用来解析中缀表达式的四则运算，快速扫一眼，似乎涉及到了运算优先级和略复杂的递归调用，所以我们从最简单的测试样例开始讲解。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">l1=[<span class="string">'calc'</span>,[<span class="number">1</span>,<span class="string">'+'</span>,<span class="number">2</span>,<span class="string">'-'</span>,<span class="number">3</span>]]</div></pre></td></tr></table></figure>
+<p>本想画个UML图的，但是看着太乱所以作罢。由于之前已经讲过了两个例子，所以这里大家应该都可以自己顺利地从测试出发来阅读相关代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(self, l)</span>:</span></div><div class="line">    f = l[<span class="number">1</span>]</div><div class="line">    <span class="keyword">if</span> len(f) &gt; <span class="number">1</span>:</div><div class="line">        t = self.calc_apply(f)</div><div class="line">        r = self.calc([<span class="string">'calc'</span>, t])</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        r = f[<span class="number">0</span>]</div><div class="line">    <span class="keyword">return</span> r</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_apply</span><span class="params">(self, l)</span>:</span></div><div class="line">    <span class="keyword">for</span> i, e <span class="keyword">in</span> enumerate(l):</div><div class="line">        <span class="keyword">if</span> type(e) == list:</div><div class="line">            r = self.calc_list(l)</div><div class="line">            <span class="keyword">return</span> r</div><div class="line">    <span class="keyword">if</span> (<span class="string">'*'</span> <span class="keyword">in</span> l) <span class="keyword">or</span> (<span class="string">'/'</span> <span class="keyword">in</span> l):</div><div class="line">        r = self.calc_common(l, [<span class="string">'*'</span>, <span class="string">'/'</span>])</div><div class="line">        <span class="keyword">return</span> r</div><div class="line">    <span class="keyword">elif</span> (<span class="string">'+'</span> <span class="keyword">in</span> l) <span class="keyword">or</span> (<span class="string">'-'</span> <span class="keyword">in</span> l):</div><div class="line">        r = self.calc_common(l, [<span class="string">'+'</span>, <span class="string">'-'</span>])</div><div class="line">        <span class="keyword">return</span> r</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_common</span><span class="params">(self, l, t)</span>:</span></div><div class="line">    <span class="keyword">for</span> i, e <span class="keyword">in</span> enumerate(l):</div><div class="line">        <span class="comment"># print('i, e', i, e)</span></div><div class="line">        <span class="keyword">if</span> e <span class="keyword">in</span> t:</div><div class="line">            <span class="comment"># print('if in')</span></div><div class="line">            token = self.apply([e, l[i - <span class="number">1</span>], l[i + <span class="number">1</span>]])</div><div class="line">            r = l[:i - <span class="number">1</span>] + [token] + l[i + <span class="number">2</span>:]</div><div class="line">            <span class="comment"># print('r', r)</span></div><div class="line">            <span class="keyword">return</span> r</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calc_list</span><span class="params">(self, l)</span>:</span></div><div class="line">    <span class="keyword">for</span> i, e <span class="keyword">in</span> enumerate(l):</div><div class="line">        <span class="comment"># print('i, e', i, e)</span></div><div class="line">        <span class="keyword">if</span> type(e) == list:</div><div class="line">            t = self.calc([<span class="string">'calc'</span>, e])</div><div class="line">            r = l[:i] + [t] + l[i + <span class="number">1</span>:]</div><div class="line">            <span class="keyword">return</span> r</div></pre></td></tr></table></figure>
+<p>在这个只有加减法且无嵌套的例子里，我们可以解决掉 calc() / 部分的calc_apply() / calc_common() 。重点是 calc_common() 中对 apply() 的递归调用，用于解决多运算符情况下的连续计算问题。 解决了简单情况，现在来看剩下的那部分相关代码，结合剩下的测试：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">l2=[<span class="string">'calc'</span>,[<span class="number">1</span>,<span class="string">'+'</span>,<span class="number">2</span>,<span class="string">'*'</span>,<span class="number">3</span>,<span class="string">'/'</span>,<span class="number">2</span>]]</div><div class="line">l3=[<span class="string">'calc'</span>,[<span class="number">1</span>,<span class="string">'+'</span>,<span class="number">2</span>,<span class="string">'*'</span>,[<span class="number">1</span>,<span class="string">'+'</span>,[<span class="number">1</span>,<span class="string">'+'</span>,<span class="number">1</span>]],<span class="string">'/'</span>,<span class="number">2</span>]]</div></pre></td></tr></table></figure>
+<p>涉及到了运算符优先级，根据刚才的印象和直觉，看calc_apply()。思路很简单，只是先处理 * 和 /，最后得到一个只含有 + 或 - 的表达式，然后其他部分和之前的分析一致。</p>
+<p>现在只剩下了嵌套表达式的解析，我们继续分析，重点在 calc_list()，这里只涉及到了 calc() 的递归调用：将问题不断细化，保证每个子问题都不包含嵌套表达式，也就是可以像我们刚才举的前两个例子那样被正确解析。如果看着有点蒙可以画个语法树/打印函数中的重要变量/搜索引擎搜索相关表达式解析原理blabla，很好理解。</p>
+<p>至此，通过逐步的分析与思考，我们结束 var 以及 calc 的解析。</p>
 
     </article>
     <!-- 前后页  -->
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2018/03/19/《代码大全》读书笔记节选-1/" title= 《代码大全》读书笔记节选(1) >
-                    <div class="nextTitle">《代码大全》读书笔记节选(1)</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2017/11/25/记一次程序设计实验周/" title= 记一次程序设计实验周 >
-                    <div class="prevTitle">记一次程序设计实验周</div>
+                <a href= "/2018/05/19/学习构建玩具lisp解释器（1）/" title= 学习构建玩具lisp解释器（1） >
+                    <div class="prevTitle">学习构建玩具lisp解释器（1）</div>
                 </a>
             
         </li>
@@ -476,7 +484,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#读过很多烂书后，我不禁反思…"><span class="toc-number">1.</span> <span class="toc-text">读过很多烂书后，我不禁反思…</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#学习构建玩具lisp解释器（2）"><span class="toc-number">1.</span> <span class="toc-text">学习构建玩具lisp解释器（2）</span></a></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
