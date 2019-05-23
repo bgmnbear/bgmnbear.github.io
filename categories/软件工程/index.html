@@ -215,6 +215,43 @@
         
     </div>
 </div>
+        <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.slim.min.js"></script>
+
+
+
+    
+    <script>
+
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min)) + min; //不含最大值，含最小值
+        }
+    
+        function setIntroBgImg() {
+            let imgNum = 3
+            let index = getRandomInt(0, imgNum)
+            let path = "url(/intro/index-bg" + index + ".jpg"
+            $(".site-intro-img").css("background-image", path)
+        }
+    
+        function load() {
+            setIntroBgImg()
+        }
+    
+        function main() {
+            let isRandImg = true
+            if(isRandImg) {
+                load()
+            }
+        }
+    
+        main()
+    
+    </script>
+
+
+
         <script>
   // load webfont-loader async, and add callback function
   function async(u, c) {
@@ -464,10 +501,6 @@
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
-    
-    
-    
-    
     
     
     
